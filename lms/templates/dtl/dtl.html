@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTL DEMO</title>
+</head>
+<body>
+    <h1>DTL for Beginners</h1>
+    {% comment %} Handle bar syntax or moustache syntax {% endcomment %}
+    <h2>Hey, My name is {{ my_name|lower }}</h2>
+    <div><p>I teach {{ courses }}</p></div>
+    <p>I am {{ age }} years old.</p>
+
+    {% if is_logged_in %}
+    <h3>You are logged in</h3>
+    {% else %}
+    <h3>You are not logged in</h3>
+    {% endif %}
+
+    {% if my_name == "Winnie" %}
+    <h3>Hello, Winnie</h3>
+    {% elif my_name == "Ope" %}
+    <h3>Hello, Ope</h3>
+    {% else %}
+    <h3>Hello, Stranger</h3>
+    {% endif %}
+
+    <ul>
+    {% for course in courses %}
+        <li>{{ course }}</li>
+    {% endfor %}
+    </ul>
+
+    <h3>Today is {{ today|date:"d/m/Y" }}</h3>
+
+    <div>
+        {% for course, score in grades.items %}
+        <p>I scored {{ score }} in {{ course }}</p>
+        {% endfor %}
+    </div>
+
+    <p>{{ grades.Math }}</p>
+
+
+</body>
+</html>
