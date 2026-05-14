@@ -1,11 +1,19 @@
 {% extends "partials/base.html" %}
+{% load static %}
+
 
 {% block title %}
 List of Authors
 {% endblock title %}
 
 
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/author_list.css' %}">
+{% endblock extra_styles %}
 
 {% block content %}
-<h1>List of Authors</h1>
-{% endblock content %}
+<section class="author-list-page">
+    <h1>List of Authors</h1>
+</section>{% endblock content %}
+
+{% comment %} ORM -> Object Relational Mapper {% endcomment %}

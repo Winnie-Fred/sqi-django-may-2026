@@ -1,0 +1,617 @@
+/* =========================================================
+   Base Theme
+   ========================================================= */
+:root {
+    --bg: #f5f7fb;
+    --bg-soft: #eef2ff;
+    --surface: #ffffff;
+    --surface-muted: #f8fafc;
+
+    --text: #0f172a;
+    --text-muted: #64748b;
+
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --primary-soft: rgba(79, 70, 229, 0.12);
+
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+
+    --success: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.12);
+
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    --container: 1200px;
+    --transition: 180ms ease;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(79, 70, 229, 0.10), transparent 30%),
+        radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 25%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+}
+
+/* =========================================================
+   Typography
+   ========================================================= */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 0.75rem;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--text);
+}
+
+p {
+    margin: 0 0 1rem;
+    color: var(--text-muted);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--transition), opacity var(--transition);
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* =========================================================
+   Layout helpers
+   ========================================================= */
+.container {
+    width: min(var(--container), calc(100% - 2rem));
+    margin-inline: auto;
+}
+
+main,
+.block-content,
+.content {
+    padding: 2rem 0 4rem;
+}
+
+.section {
+    margin-bottom: 2.5rem;
+}
+
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+   Header / Navigation
+   Works with a semantic <header> or .site-header
+   ========================================================= */
+header,
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.78);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+header .container,
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 72px;
+    padding-block: 0.75rem;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: var(--text);
+    font-weight: 500;
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+nav a:hover {
+    background: var(--primary-soft);
+    color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+/* Optional logo styling */
+.logo,
+.brand,
+.site-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    font-size: 1.05rem;
+}
+
+.logo:hover,
+.brand:hover,
+.site-brand:hover {
+    color: var(--text);
+}
+
+/* =========================================================
+   Common content surfaces
+   ========================================================= */
+.card,
+.panel,
+.box,
+.surface {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.card:hover,
+.panel:hover,
+.box:hover,
+.surface:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-strong);
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+button,
+.btn,
+input[type="submit"],
+input[type="button"] {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.15rem;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 600;
+    line-height: 1;
+    transition:
+        transform var(--transition),
+        background var(--transition),
+        box-shadow var(--transition),
+        opacity var(--transition);
+}
+
+.btn-primary,
+button.primary,
+input[type="submit"] {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.22);
+}
+
+.btn-primary:hover,
+button.primary:hover,
+input[type="submit"]:hover {
+    transform: translateY(-1px);
+    opacity: 0.96;
+}
+
+.btn-secondary,
+button.secondary {
+    background: var(--surface-muted);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover,
+button.secondary:hover {
+    transform: translateY(-1px);
+    background: #fff;
+}
+
+/* =========================================================
+   Forms
+   ========================================================= */
+form {
+    display: grid;
+    gap: 1rem;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    color: var(--text);
+    font: inherit;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: rgba(79, 70, 229, 0.6);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+}
+
+textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.form-group {
+    display: grid;
+    gap: 0.4rem;
+}
+
+/* =========================================================
+   Tables
+   ========================================================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+th,
+td {
+    padding: 0.95rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background: #f8fafc;
+    color: var(--text);
+    font-weight: 700;
+}
+
+tr:hover td {
+    background: #fbfdff;
+}
+
+/* =========================================================
+   Alerts / messages
+   ========================================================= */
+.alert,
+.message,
+.notification {
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    margin-bottom: 1rem;
+}
+
+.alert-success {
+    background: rgba(22, 163, 74, 0.08);
+    border-color: rgba(22, 163, 74, 0.18);
+    color: #166534;
+}
+
+.alert-warning {
+    background: rgba(217, 119, 6, 0.08);
+    border-color: rgba(217, 119, 6, 0.18);
+    color: #92400e;
+}
+
+.alert-danger {
+    background: rgba(220, 38, 38, 0.08);
+    border-color: rgba(220, 38, 38, 0.18);
+    color: #991b1b;
+}
+
+.alert-info {
+    background: rgba(14, 165, 233, 0.08);
+    border-color: rgba(14, 165, 233, 0.18);
+    color: #0c4a6e;
+}
+
+/* =========================================================
+   Utility classes
+   ========================================================= */
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.p-1 { padding: 0.5rem; }
+.p-2 { padding: 1rem; }
+.p-3 { padding: 1.5rem; }
+.p-4 { padding: 2rem; }
+
+.rounded {
+    border-radius: var(--radius-md);
+}
+
+.shadow {
+    box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+footer,
+.site-footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0 2rem;
+    color: var(--text-muted);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.45);
+}
+
+/* =========================================================
+   Responsive tweaks
+   ========================================================= */
+@media (max-width: 768px) {
+    header .container,
+    .site-header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    nav a {
+        padding: 0.45rem 0.75rem;
+    }
+
+    main,
+    .block-content,
+    .content {
+        padding-top: 1.25rem;
+    }
+
+    .card,
+    .panel,
+    .box,
+    .surface {
+        padding: 1.1rem;
+        border-radius: 18px;
+    }
+}
+
+/* =========================================================
+   Header
+   ========================================================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    backdrop-filter: blur(14px);
+
+    background: rgba(255, 255, 255, 0.75);
+
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.04),
+        0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+/* Navigation container */
+nav {
+    width: min(1200px, calc(100% - 2rem));
+
+    margin-inline: auto;
+
+    padding: 1rem 0;
+}
+
+/* Navigation list */
+nav ul {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    list-style: none;
+
+    margin: 0;
+
+    padding: 0;
+}
+
+/* Navigation items */
+nav li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation links */
+nav a {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0.8rem 1.2rem;
+
+    border-radius: 999px;
+
+    color: var(--text);
+
+    font-size: 0.95rem;
+
+    font-weight: 600;
+
+    letter-spacing: -0.01em;
+
+    text-decoration: none;
+
+    transition:
+        background 180ms ease,
+        color 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+/* Hover effect */
+nav a:hover {
+    background: rgba(79, 70, 229, 0.12);
+
+    color: var(--primary);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(79, 70, 229, 0.12);
+}
+
+/* Active click feel */
+nav a:active {
+    transform: translateY(0);
+}
+
+/* Underline animation */
+nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 10px;
+
+    width: 0%;
+
+    height: 2px;
+
+    background: var(--primary);
+
+    border-radius: 999px;
+
+    transform: translateX(-50%);
+
+    transition: width 180ms ease;
+}
+
+nav a:hover::after {
+    width: 40%;
+}
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-wrap: wrap;
+
+        gap: 0.5rem;
+
+        justify-content: center;
+    }
+
+    nav a {
+        padding: 0.7rem 1rem;
+
+        font-size: 0.9rem;
+    }
+}

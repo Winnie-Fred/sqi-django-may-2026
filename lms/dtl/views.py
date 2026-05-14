@@ -18,3 +18,6 @@ def dtl_demo(request):
         }
     }
     return render(request, "dtl/dtl.html", context)
+
+
+# static files -> css, js, images, fonts, icons
