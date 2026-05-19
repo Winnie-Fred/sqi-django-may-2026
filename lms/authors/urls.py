@@ -7,4 +7,5 @@ app_name = "authors"
 urlpatterns = [
     path('', views.all_authors, name='all_authors'),
     path('book-signings/', views.book_signings, name='book_signings'),
+    path('mvt/', views.model_in_view, name="model_in_view"),
 ]

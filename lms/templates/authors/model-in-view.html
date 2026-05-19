@@ -1,0 +1,51 @@
+{% extends "partials/base.html" %}
+
+{% block title %}
+Model-View-Template
+{% endblock title %}
+
+{% block content %}
+<h2>MVT</h2>
+{% comment %} 
+<h3>All the Authors</h3>
+
+{% for author in all_the_authors %}
+
+<p>{{ author.first_name }} {{ author.last_name }} born on {{ author.birth_date }}</p>
+
+{% endfor %} {% endcomment %}
+
+<h3>All Authors born before 1950</h3>
+
+{% comment %} {% for author in authors_born_before_1950 %}
+
+<p>{{ author.first_name }} {{ author.last_name }} born on {{ author.birth_date }}</p>
+
+{% endfor %} {% endcomment %}
+
+
+{% comment %} <h3>All Authors descending</h3>
+{% for author in all_authors_desc %}
+
+<p>{{ author.first_name }} {{ author.last_name }}</p>
+
+<h4>Books by {{ author.first_name }} {{ author.last_name }}</h4>
+
+<ul>
+{% for book in author.books.all %}
+<li>{{ book.title }} published on {{ book.published_on }}</li>
+{% endfor %}
+</ul>
+
+{% endfor %} {% endcomment %}
+
+<h3>Author with PK 7</h3>
+<p>{{ author_pk_7 }}</p>
+
+
+<h3>Author with PK 1000</h3>
+<p>{{ nonexistent_author }}</p>
+
+
+
+{% endblock content %}
