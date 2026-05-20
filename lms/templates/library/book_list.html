@@ -7,4 +7,11 @@ List of Books
 
 {% block content %}
 <h1>List of Books</h1>
+
+<div>
+    {% for book in all_books %}
+        <a href="{% url 'library:book_detail' book.pk %}"><h3>{{ book.title }}</h3></a>
+    {% endfor %}
+</div>
+
 {% endblock content %}
