@@ -1,0 +1,20 @@
+{% extends "partials/base.html" %}
+
+{% block title %}
+Update {{ book.title }}
+{% endblock title %}
+
+
+{% block content %}
+<h1>Update {{ book.title }}</h1>
+
+<div>
+   <form method="POST" class="bookCreationForm" action="{% url 'library:update_book_model_form' book.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% comment %} Cross Site Request Forgery {% endcomment %}
+        {{ form.as_div }}
+        <button type="submit">Update</button>
+   </form>
+</div>
+
+{% endblock content %}

@@ -53,3 +53,21 @@ def create_book_simple_form(request):
         "form": form
     }
     return render(request, "library/create-book-simple-form.html", context)
+
+
+def update_book_model_form(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    form = BookForm(instance=book)
+
+    if request.method == "POST":
+        form = BookForm(request.POST, request.FILES, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect("library:book_detail", book_pk=book_id)
+
+    context = {
+        "book": book,
+        "form": form
+    }
+
+    return render(request, "library/update-book-model-form.html", context)

@@ -15,6 +15,7 @@
     {% endif %}
     <p>Published on {{ book.published_on }}</p>
     <p>Number of Pages: {{ book.number_of_pages }}</p>
+    <p><a href="{% url 'library:update_book_model_form' book.id %}">Update</a></p>
 </div>
 
 {% endblock content %}
