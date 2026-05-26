@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Book
+from .models import Book, Author
 
 class BookForm(forms.ModelForm):
     class Meta:
@@ -8,3 +8,9 @@ class BookForm(forms.ModelForm):
         fields = ["title", "author", "number_of_pages", "published_on", "cover_image"]
 
 
+class BookSimpleForm(forms.Form):
+    title = forms.CharField(max_length=255)
+    author = forms.ModelChoiceField(queryset=Author.objects.all())
+    number_of_pages = forms.IntegerField(min_value=1)
+    published_on = forms.DateField()
+    cover_image = forms.ImageField(required=False)

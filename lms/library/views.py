@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Book
-from .forms import BookForm
+from .forms import BookForm, BookSimpleForm
 
 # Create your views here.
 
@@ -31,3 +31,25 @@ def create_book_model_form(request):
         "form": form
     }
     return render(request, "library/create-book-model-form.html", context)
+
+
+def create_book_simple_form(request):
+    form = BookSimpleForm()
+
+    if request.method == "POST":
+        form = BookSimpleForm(request.POST, request.FILES)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            Book.objects.create(
+                title=cleaned_data["title"],
+                author=cleaned_data["author"],
+                number_of_pages=cleaned_data["number_of_pages"],
+                published_on=cleaned_data["published_on"],
+                cover_image=cleaned_data["cover_image"]
+            )
+            return redirect("library:book_list")
+        
+    context = {
+        "form": form
+    }
+    return render(request, "library/create-book-simple-form.html", context)
