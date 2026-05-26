@@ -12,4 +12,6 @@ urlpatterns = [
     path('create/book/simple/', views.create_book_simple_form, name="create_book_simple_form"),
     path('update_book_model_form/<int:book_id>/', views.update_book_model_form, name="update_book_model_form"),
     path('update_book_simple_form/<int:book_id>/', views.update_book_simple_form, name="update_book_simple_form"),
+    path('confirm_delete/<int:book_id>/', views.confirm_delete, name="confirm_delete"),
+    path('delete_book/<int:book_id>/', views.delete_book, name="delete_book"),
 ]

@@ -17,6 +17,7 @@
     <p>Number of Pages: {{ book.number_of_pages }}</p>
     {% comment %} <p><a href="{% url 'library:update_book_model_form' book.id %}">Update</a></p> {% endcomment %}
     <p><a href="{% url 'library:update_book_simple_form' book.id %}">Update</a></p>
+    <p><a href="{% url 'library:confirm_delete' book.id %}">Delete</a></p>
 </div>
 </div>
 

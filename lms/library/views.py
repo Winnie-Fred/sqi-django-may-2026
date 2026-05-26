@@ -101,3 +101,16 @@ def update_book_simple_form(request, book_id):
     }
 
     return render(request, "library/update-book-simple-form.html", context)
+
+
+def confirm_delete(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    return render(request, "library/confirm_delete.html", {"book": book})
+
+
+def delete_book(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    if request.method == "POST":
+        book.delete()
+    
+    return redirect("library:book_list")

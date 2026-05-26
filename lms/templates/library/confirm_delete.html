@@ -1,0 +1,24 @@
+{% extends "partials/base.html" %}
+
+{% block title %}
+Confirm Delete
+{% endblock title %}
+
+
+{% block content %}
+<h1>Confirm Delete</h1>
+
+<div>
+   <h3>Are you sure you want to delete {{ book.title }}?</h3>
+
+   <form method="POST" class="bookCreationForm" action="{% url 'library:delete_book' book.id %}">
+        {% csrf_token %}
+        {% comment %} Cross Site Request Forgery {% endcomment %}
+        <button type="submit">Yes, I am sure</button>
+   </form>
+
+   <a href="{% url 'library:book_detail' book.id %}">No, take me back</a>
+
+</div>
+
+{% endblock content %}
