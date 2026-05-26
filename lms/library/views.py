@@ -71,3 +71,33 @@ def update_book_model_form(request, book_id):
     }
 
     return render(request, "library/update-book-model-form.html", context)
+
+
+def update_book_simple_form(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    form = BookSimpleForm(initial={
+        "title": book.title,
+        "author": book.author,
+        "number_of_pages": book.number_of_pages,
+        "published_on": book.published_on,
+        "cover_image": book.cover_image
+    })
+
+    if request.method == "POST":
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            book.title = cleaned_data["title"]
+            book.author = cleaned_data["author"]
+            book.number_of_pages = cleaned_data["number_of_pages"]
+            book.published_on = cleaned_data["published_on"]
+            book.cover_image = cleaned_data["cover_image"]
+            book.save()
+            return redirect("library:book_detail", book_pk=book_id)
+
+    context = {
+        "book": book,
+        "form": form
+    }
+
+    return render(request, "library/update-book-simple-form.html", context)
