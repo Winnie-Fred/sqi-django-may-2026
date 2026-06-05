@@ -11,7 +11,25 @@
 </head>
 <body>
 
+    <div>
     {% include "partials/header.html" %}
+
+    {% if request.user.is_authenticated %}
+        <h3>Hello, {{ request.user }}</h3>
+    {% else %}
+        <h3>Hello</h3>
+    {% endif %}
+    </div>
+
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     {% block content %} 
     something

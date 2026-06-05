@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'authors',
     'library',
     'core',
+    'users',
 
 ]
 
@@ -125,3 +126,8 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / "media"
+
+
+LOGIN_REDIRECT_URL = "core:home"
+LOGOUT_REDIRECT_URL = "core:home"
+LOGIN_URL = "users:login"

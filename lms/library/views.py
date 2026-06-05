@@ -1,7 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 from .models import Book
 from .forms import BookForm, BookSimpleForm
+
 
 # Create your views here.
 
@@ -18,15 +22,17 @@ def book_detail(request, book_pk):
     return render(request, "library/book_detail.html", {"book": book})
 
 
+@login_required
 def create_book_model_form(request):
     form = BookForm()
 
     if request.method == "POST":
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.added_by = request.user
+            user.save()
             return redirect("library:book_list")
-        
     context = {
         "form": form
     }
@@ -54,10 +60,14 @@ def create_book_simple_form(request):
     }
     return render(request, "library/create-book-simple-form.html", context)
 
-
+@login_required
 def update_book_model_form(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     form = BookForm(instance=book)
+
+    if request.user != book.added_by:
+        messages.error(request, "You do not have permission to perform that action")
+        return redirect("users:login")
 
     if request.method == "POST":
         form = BookForm(request.POST, request.FILES, instance=book)
@@ -72,9 +82,12 @@ def update_book_model_form(request, book_id):
 
     return render(request, "library/update-book-model-form.html", context)
 
-
+@login_required
 def update_book_simple_form(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
+    if request.user != book.added_by:
+        messages.error(request, "You do not have permission to perform that action")
+        return redirect("users:login")
     form = BookSimpleForm(initial={
         "title": book.title,
         "author": book.author,
@@ -103,11 +116,13 @@ def update_book_simple_form(request, book_id):
     return render(request, "library/update-book-simple-form.html", context)
 
 
+@login_required
 def confirm_delete(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     return render(request, "library/confirm_delete.html", {"book": book})
 
 
+@login_required
 def delete_book(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     if request.method == "POST":
